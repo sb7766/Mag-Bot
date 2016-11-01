@@ -1,0 +1,5 @@
+﻿1>------ Build started: Project: Mag-Bot, Configuration: Debug Any CPU ------
+1>C:\Users\Sean\Documents\Mag-Bot\Mag-Bot\Program.cs(23,41,23,43): error CS1002: ; expected
+1>C:\Users\Sean\Documents\Mag-Bot\Mag-Bot\Program.cs(23,57,23,58): error CS1002: ; expected
+1>C:\Users\Sean\Documents\Mag-Bot\Mag-Bot\Program.cs(23,58,23,63): error CS1520: Method must have a return type
+========== Build: 0 succeeded, 1 failed, 0 up-to-date, 0 skipped ==========
