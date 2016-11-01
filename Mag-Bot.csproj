@@ -161,16 +161,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PonyModule.cs" />
-    <Compile Include="FurryModule.cs" />
-    <Compile Include="GeneralModule.cs" />
-    <Compile Include="RaffleModule.cs" />
+    <Compile Include="Modules\PonyModule.cs" />
+    <Compile Include="Modules\FurryModule.cs" />
+    <Compile Include="Modules\GeneralModule.cs" />
+    <Compile Include="Modules\RaffleModule.cs" />
     <Compile Include="RandomNumberGenerator.cs" />
-    <Compile Include="SilvRankModule.cs" />
-    <Compile Include="RankModule.cs" />
-    <Compile Include="Search.cs" />
-    <Compile Include="ModulesModule.cs" />
-    <Compile Include="OwnerModule.cs" />
+    <Compile Include="Modules\SilvRankModule.cs" />
+    <Compile Include="Modules\RankModule.cs" />
+    <Compile Include="Modules\Search.cs" />
+    <Compile Include="Modules\ModulesModule.cs" />
+    <Compile Include="Modules\OwnerModule.cs" />
     <Compile Include="PermissionLevels.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
