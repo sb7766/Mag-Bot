@@ -161,7 +161,7 @@ namespace MagBot
                 //{
                 Task.Run(async () =>
                     {
-                        await client.Connect("MTk4Mjk3MTM2NDQwMjc5MDQw.Clr3sQ.3DjKCEYKmYO07YH2ZioZDTbn-b4", TokenType.Bot);
+                        await client.Connect(File.ReadAllText("Token.txt"), TokenType.Bot);
                     });
                     
                 //});
