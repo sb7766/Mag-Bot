@@ -28,6 +28,11 @@ namespace MagBot
                 cgb.CreateCommand("shutdown")
                     .Do(async e =>
                     {
+                        if (RaffleModule.RaffleRunning())
+                        {
+                            await e.Channel.SendMessage("Raffle running, cannot shut down.");
+                            return;
+                        }
                         await e.Channel.SendMessage("Shutting down...");
                         Program.Shutdown();
                     });
@@ -35,6 +40,11 @@ namespace MagBot
                 cgb.CreateCommand("restart")
                     .Do(async e =>
                     {
+                        if (RaffleModule.RaffleRunning())
+                        {
+                            await e.Channel.SendMessage("Raffle running, cannot restart.");
+                            return;
+                        }
                         await e.Channel.SendMessage("Restarting...");
                         Program.Restart();
                     });

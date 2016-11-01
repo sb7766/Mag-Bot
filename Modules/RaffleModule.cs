@@ -16,12 +16,12 @@ namespace MagBot
     {
         private DiscordClient client;
         private ModuleManager manager;
-        private ConcurrentDictionary<ulong, List<ulong>> raffleentries;
-        private ConcurrentDictionary<ulong, bool> rafflerunning;
-        private ConcurrentDictionary<ulong, ulong> raffleowners;
-        private ConcurrentDictionary<ulong, Role> roleneeded;
-        private ConcurrentDictionary<ulong, Timer> raffletimers;
-        private ConcurrentDictionary<ulong, DateTime> timestarted;
+        private static ConcurrentDictionary<ulong, List<ulong>> raffleentries;
+        private static ConcurrentDictionary<ulong, bool> rafflerunning;
+        private static ConcurrentDictionary<ulong, ulong> raffleowners;
+        private static ConcurrentDictionary<ulong, Role> roleneeded;
+        private static ConcurrentDictionary<ulong, Timer> raffletimers;
+        private static ConcurrentDictionary<ulong, DateTime> timestarted;
 
         void IModule.Install(ModuleManager _manager)
         {
@@ -367,5 +367,19 @@ namespace MagBot
             raffleowners[e.Server.Id] = 0;
             rafflerunning[e.Server.Id] = false;
         }
+
+        public static bool RaffleRunning()
+        {
+            foreach(bool b in rafflerunning.Values)
+            {
+                if(b)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
     }
 }
