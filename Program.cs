@@ -184,15 +184,37 @@ namespace MagBot
                 string input = Console.ReadLine();
                 if (input == "shutdown")
                 {
+                    if (RaffleModule.RaffleRunning())
+                    {
+                        client.Log.Log(LogSeverity.Warning, "Mag-Bot", "Raffle running, cannot shut down.");
+                        continue;
+                    }
                     Shutdown();
                 }
                 else if (input == "restart")
                 {
+                    if (RaffleModule.RaffleRunning())
+                    {
+                        client.Log.Log(LogSeverity.Warning, "Mag-Bot", "Raffle running, cannot restart.");
+                        continue;
+                    }
                     Restart();
                 }
                 else if (input == "save")
                 {
                     Save();
+                }
+                else if (input == "reload")
+                {
+                    Load();
+                }
+                else if (input == "forceshutdown")
+                {
+                    Shutdown();
+                }
+                else if (input == "forcerestart")
+                {
+                    Restart();
                 }
                 else
                 {
@@ -205,11 +227,6 @@ namespace MagBot
         public static void Shutdown()
         {
             client.Log.Log(LogSeverity.Info, "Mag-Bot", "Recieved shutdown command.");
-            if(RaffleModule.RaffleRunning())
-            {
-                client.Log.Log(LogSeverity.Warning, "Mag-Bot", "Raffle running, cannot shut down.");
-                return;
-            }
             Save();
             savetimer.Dispose();
             Thread.Sleep(2000);
@@ -223,11 +240,6 @@ namespace MagBot
         public static void Restart()
         {
             client.Log.Log(LogSeverity.Info, "Mag-Bot", "Recieved restart command.");
-            if (RaffleModule.RaffleRunning())
-            {
-                client.Log.Log(LogSeverity.Warning, "Mag-Bot", "Raffle running, cannot restart.");
-                return;
-            }
             Save();
             savetimer.Dispose();
             Thread.Sleep(2000);

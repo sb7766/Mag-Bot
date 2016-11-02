@@ -49,6 +49,20 @@ namespace MagBot
                         Program.Restart();
                     });
 
+                cgb.CreateCommand("forceshutdown")
+                    .Do(async e =>
+                    {
+                        await e.Channel.SendMessage("Shutting down...");
+                        Program.Shutdown();
+                    });
+
+                cgb.CreateCommand("forcerestart")
+                    .Do(async e =>
+                    {
+                        await e.Channel.SendMessage("Restarting...");
+                        Program.Restart();
+                    });
+
                 cgb.CreateCommand("save")
                     .Do(async e =>
                     {
