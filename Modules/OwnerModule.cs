@@ -48,12 +48,21 @@ namespace MagBot
                         await e.Channel.SendMessage("Restarting...");
                         Program.Restart();
                     });
+
                 cgb.CreateCommand("save")
                     .Do(async e =>
                     {
                         await e.Channel.SendMessage("Saving...");
-                        Program.Save();
+                        await Task.Run(() => Program.Save());
                         await e.Channel.SendMessage("Saved.");
+                    });
+
+                cgb.CreateCommand("reload")
+                    .Do(async e =>
+                    {
+                        await e.Channel.SendMessage("Reloading files...");
+                        await Task.Run(() => Program.Load());
+                        await e.Channel.SendMessage("Reloaded.");
                     });
 
                 cgb.CreateCommand("setgame")
