@@ -72,6 +72,14 @@ namespace MagBot
                         await Task.Run(() => client.SetGame(e.Args[0]));
                     });
 
+                cgb.CreateCommand("echo")
+                    .Parameter("message", ParameterType.Unparsed)
+                    .Do(async e =>
+                    {
+                        await e.Message.Delete();
+                        await e.Channel.SendMessage(e.Args[0]);
+                    });
+
                 // List servers
                 cgb.CreateCommand("serverlist")
                     .AddCheck((c, u, ch) => ch.IsPrivate)
