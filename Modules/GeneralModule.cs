@@ -32,7 +32,7 @@ namespace MagBot
                         int channels = client.Servers.SelectMany(s => s.AllChannels).Count();
                         int users = client.Servers.SelectMany(s => s.Users).Count();
                         TimeSpan uptime = TimeSpan.FromTicks(DateTime.Now.Ticks) - Program.startedat;
-                        await e.Channel.SendMessage($"If you'd like to report a bug or request a feature, contact the dev.\n__Info:__\n-**Developer:** Magmatic#2220\n-**Library:** Discord.NET (0.9.4)\n-**Runtime:** .NET Framework 4.5.2\n-**Uptime:** {uptime.Days} days, {uptime.Hours} hours, {uptime.Minutes} minutes, and {uptime.Seconds} seconds\n\n__Stats:__\n-**Servers:** {servers}\n-**Channels:** {channels}\n-**Users:** {users}");
+                        await e.Channel.SendMessage($"If you'd like to report a bug or request a feature, contact the dev.\nGit Repo available at: https://github.com/sb7766/Mag-Bot\n__Info:__\n-**Developer:** Magmatic#2220\n-**Library:** Discord.NET (0.9.4)\n-**Runtime:** .NET Framework 4.5.2\n-**Uptime:** {uptime.Days} days, {uptime.Hours} hours, {uptime.Minutes} minutes, and {uptime.Seconds} seconds\n\n__Stats:__\n-**Servers:** {servers}\n-**Channels:** {channels}\n-**Users:** {users}");
                     });
 
                 // Get invite link
@@ -260,6 +260,14 @@ namespace MagBot
                         int index = RandomNumberGenerator.NumberBetween(0, choices.Count);
                         string choice = choices[index].Trim(' ');
                         await e.Channel.SendMessage($"{choice}");
+                    });
+
+                cgb.CreateCommand("owo")
+                    .Hide()
+                    .Description("What's this?")
+                    .Do(async e =>
+                    {
+                        await e.Channel.SendMessage("\awwwww!~ *nuzzles u back and pounces on u and notices your buldge* OwO what's this...?");
                     });
 
             });

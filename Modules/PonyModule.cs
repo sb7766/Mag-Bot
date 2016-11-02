@@ -60,12 +60,11 @@ namespace MagBot
                         };
                         List<Image> gifs = new List<Image>(files);
                         List<Image> frames = new List<Image>();
-                        Random rand = new Random();
                         foreach (var g in gifs)
                         {
                             FrameDimension dimension = new FrameDimension(g.FrameDimensionsList[0]);
                             int count = g.GetFrameCount(dimension);
-                            int frame = rand.Next(1, count);
+                            int frame = RandomNumberGenerator.NumberBetween(1, count);
                             g.SelectActiveFrame(dimension, frame);
                             frames.Add(g);
                         }

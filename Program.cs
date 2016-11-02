@@ -59,6 +59,16 @@ namespace MagBot
 
             // Deserialize dictionaries
             client.Log.Log(LogSeverity.Info, "Mag-Bot", "Loading files...");
+            if (!Directory.Exists("resources/data")) Directory.CreateDirectory("resources/data");
+            if (!File.Exists("resources/data/taglist.txt")) File.Create("resources/data/taglist.txt");
+            if (!File.Exists("resources/data/annolist.txt")) File.Create("resources/data/annolist.txt");
+            if (!File.Exists("resources/data/annochlist.txt")) File.Create("resources/data/annochlist.txt");
+            if (!File.Exists("resources/data/karmalist.txt")) File.Create("resources/data/karmalist.txt");
+            if (!File.Exists("resources/data/enabledmodules.txt")) File.Create("resources/data/enabledmodules.txt");
+            if (!File.Exists("resources/data/messagecount.txt")) File.Create("resources/data/messagecount.txt");
+            if (!File.Exists("resources/data/excludedchannels.txt")) File.Create("resources/data/excludedchannels.txt");
+            if (!File.Exists("resources/data/savedvars.txt")) File.Create("resources/data/savedvars.txt");
+
             taglist = JsonConvert.DeserializeObject<ConcurrentDictionary<ulong, SortedDictionary<string, List<string>>>>(File.ReadAllText("resources/data/taglist.txt"));
             annolist = JsonConvert.DeserializeObject<ConcurrentDictionary<ulong, bool>>(File.ReadAllText("resources/data/annolist.txt"));
             annochlist = JsonConvert.DeserializeObject<ConcurrentDictionary<ulong, ulong>>(File.ReadAllText("resources/data/annochlist.txt"));
