@@ -267,7 +267,7 @@ namespace MagBot
                     .Description("What's this?")
                     .Do(async e =>
                     {
-                        await e.Channel.SendMessage(@"\awwwww!~ *nuzzles u back and pounces on u and notices your buldge* OwO what's this...?");
+                        await e.Channel.SendMessage(@"awwwww!~ \*nuzzles u back and pounces on u and notices your buldge* OwO what's this...?");
                     });
 
             });
