@@ -261,7 +261,7 @@ namespace MagBot
 
                         int index = RandomNumberGenerator.NumberBetween(0, choices.Count-1);
                         string choice = choices[index].Trim(' ');
-                        await e.Channel.SendMessage($"{choice}");
+                        await e.Channel.SendMessage($"I choose: {choice}");
                     });
 
                 cgb.CreateCommand("owo")
