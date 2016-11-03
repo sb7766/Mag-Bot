@@ -5,6 +5,7 @@ using Discord;
 using Discord.Commands;
 using Discord.Commands.Permissions.Levels;
 using Discord.Modules;
+using System.IO;
 
 namespace MagBot
 {
@@ -31,8 +32,9 @@ namespace MagBot
                         int servers = client.Servers.Count();
                         int channels = client.Servers.SelectMany(s => s.AllChannels).Count();
                         int users = client.Servers.SelectMany(s => s.Users).Count();
+                        int uniqueUsers = client.Servers.SelectMany(s => s.Users).Select(u => u.Id).Distinct().Count();
                         TimeSpan uptime = TimeSpan.FromTicks(DateTime.Now.Ticks) - Program.startedat;
-                        await e.Channel.SendMessage($"If you'd like to report a bug or request a feature, contact the dev.\nGit Repo available at: https://github.com/sb7766/Mag-Bot\n__Info:__\n-**Developer:** Magmatic#2220\n-**Library:** Discord.NET (0.9.4)\n-**Runtime:** .NET Framework 4.5.2\n-**Uptime:** {uptime.Days} days, {uptime.Hours} hours, {uptime.Minutes} minutes, and {uptime.Seconds} seconds\n\n__Stats:__\n-**Servers:** {servers}\n-**Channels:** {channels}\n-**Users:** {users}");
+                        await e.Channel.SendMessage(string.Format(File.ReadAllText("resources/texts/infotext.txt"), uptime.Days, uptime.Hours, uptime.Minutes, uptime.Seconds, servers, channels, users, uniqueUsers));
                     });
 
                 // Get invite link
@@ -41,7 +43,7 @@ namespace MagBot
                     .Description("Get an invite link to add Mag-Bot to your own server!")
                     .Do(async e =>
                     {
-                        await e.User.SendMessage("Here ya go! <https://discordapp.com/oauth2/authorize?client_id=198296897784381441&scope=bot&permissions=338938929>");
+                        await e.User.SendMessage("Here ya go! <https://discordapp.com/oauth2/authorize?client_id=198296897784381441&scope=bot&permissions=939712561>");
                     });
 
                 // Announcement command group
@@ -257,7 +259,7 @@ namespace MagBot
                             choices = new List<string>(choicesunsplit.Split(' '));
                         }
 
-                        int index = RandomNumberGenerator.NumberBetween(0, choices.Count);
+                        int index = RandomNumberGenerator.NumberBetween(0, choices.Count-1);
                         string choice = choices[index].Trim(' ');
                         await e.Channel.SendMessage($"{choice}");
                     });
@@ -267,6 +269,7 @@ namespace MagBot
                     .Description("What's this?")
                     .Do(async e =>
                     {
+                        await e.Message.Delete();
                         await e.Channel.SendMessage(@"awwwww!~ \*nuzzles u back and pounces on u and notices your buldge* OwO what's this...?");
                     });
 
