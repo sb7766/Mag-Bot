@@ -9,6 +9,7 @@ using System.Net;
 using Newtonsoft.Json.Linq;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace MagBot
 {
@@ -49,7 +50,7 @@ namespace MagBot
                     .Description("Generates a random pony for you to draw!")
                     .Do(async e =>
                     {
-                        Image[] files = 
+                        List<Image> gifs = new List<Image>
                         {
                             Image.FromFile("resources/gifs/tumblr_o5n1dwnPrz1v7wqx6o2_500.gif"),
                             Image.FromFile("resources/gifs/tumblr_o5n1dwnPrz1v7wqx6o3_500.gif"),
@@ -58,7 +59,6 @@ namespace MagBot
                             Image.FromFile("resources/gifs/tumblr_o5n1dwnPrz1v7wqx6o6_500.gif"),
                             Image.FromFile("resources/gifs/tumblr_o5n1dwnPrz1v7wqx6o7_500.gif")
                         };
-                        List<Image> gifs = new List<Image>(files);
                         List<Image> frames = new List<Image>();
                         foreach (var g in gifs)
                         {
@@ -78,6 +78,8 @@ namespace MagBot
                             g.DrawImage(frames[4], frames[3].Width, frames[1].Height);
                             g.DrawImage(frames[5], frames[3].Width + frames[4].Width, frames[2].Height);
                         }
+                        if (File.Exists("resources/gifs/complete.png")) File.Delete("resources/gifs/complete.png");
+
                         complete.Save("resources/gifs/complete.png", ImageFormat.Png);
                         
                         await e.Channel.SendFile("resources/gifs/complete.png");
