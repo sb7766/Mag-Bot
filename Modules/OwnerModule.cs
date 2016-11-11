@@ -7,6 +7,9 @@ using Discord;
 using Discord.Commands;
 using Discord.Commands.Permissions.Levels;
 using Discord.Modules;
+using System.Drawing;
+using System.IO;
+using System.Net;
 
 namespace MagBot
 {
@@ -84,6 +87,30 @@ namespace MagBot
                     .Do(async e =>
                     {
                         await Task.Run(() => client.SetGame(e.Args[0]));
+                    });
+
+                cgb.CreateCommand("setavatar")
+                    .Parameter("link", ParameterType.Optional)
+                    .Do(async e =>
+                    {
+                        Message.Attachment image = e.Message.Attachments.ElementAtOrDefault(0);
+                        string link = e.Args.ElementAtOrDefault(0);
+                        if (image != null && image.Filename.EndsWith(".png"))
+                        {
+                            Stream imageStream = new MemoryStream(new WebClient().DownloadData(new Uri(image.Url)));
+                            await client.CurrentUser.Edit("", null, null, null, imageStream, ImageType.Png);
+                            await e.Channel.SendMessage("Avatar updated.");
+                        }
+                        else if (link != null && link != "" && link.EndsWith(".png"))
+                        {
+                            Stream imageStream = new MemoryStream(new WebClient().DownloadData(new Uri(link)));
+                            await client.CurrentUser.Edit("", null, null, null, imageStream, ImageType.Png);
+                            await e.Channel.SendMessage("Avatar updated.");
+                        }
+                        else
+                        {
+                            await e.Channel.SendMessage("You must attach or link a png image.");
+                        }
                     });
 
                 cgb.CreateCommand("echo")

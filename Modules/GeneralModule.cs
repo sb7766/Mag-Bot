@@ -235,8 +235,8 @@ namespace MagBot
                         .Do(async e =>
                         {
                             SortedDictionary<string, List<string>> tags = new SortedDictionary<string, List<string>>();
-                            Program.taglist.GetOrAdd(e.Server.Id, tags);
-                            SortedDictionary<string, List<string>>.KeyCollection keys = tags.Keys;
+                            tags = Program.taglist.GetOrAdd(e.Server.Id, tags);
+                            List<string> keys = tags.Keys.ToList();
                             string keylist = "The following tags are available: " + string.Join(", ", keys);
                             await e.Message.User.SendMessage(keylist);
                         });
