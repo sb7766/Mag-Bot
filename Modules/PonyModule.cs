@@ -78,6 +78,7 @@ namespace MagBot
                             g.DrawImage(frames[4], frames[3].Width, frames[1].Height);
                             g.DrawImage(frames[5], frames[3].Width + frames[4].Width, frames[2].Height);
                         }
+
                         if (File.Exists("resources/gifs/complete.png")) File.Delete("resources/gifs/complete.png");
 
                         complete.Save("resources/gifs/complete.png", ImageFormat.Png);
